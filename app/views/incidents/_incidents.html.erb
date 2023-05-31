@@ -1,0 +1,30 @@
+<%= image_tag("logo.svg", width: 200) %>
+
+<%= turbo_frame_tag "incidents" do %>
+  <table class="w-screen">
+    <thead class="uppercase bg-orange-300">
+      <th class="px-5"><%= sort_link(column: "id") %></th>
+      <th><%= sort_link(column: "title") %></th>
+      <th><%= sort_link(column: "description") %></th>
+      <th><%= sort_link(column: "severity") %></th>
+      <th><%= sort_link(column: "author") %></th>
+      <th><%= sort_link(column: "created_at") %></th>
+      <th><%= sort_link(column: "updated_at") %></th>
+      <th><%= sort_link(column: "resolved_at") %></th>
+    </thead>
+    <tbody>
+      <% incidents.each do |incident| %>
+        <tr class="hover:bg-neutral-100">
+          <td class="px-5"><%= incident.id %></td>
+          <td><%= incident.title %></td>
+          <td><%= incident.description %></td>
+          <td><%= incident.severity %></td>
+          <td><%= incident.author %></td>
+          <td><%= incident.created_at.to_formatted_s(:long)  %></td>
+          <td><%= incident.updated_at.to_formatted_s(:long)  %></td>
+          <td><%= incident&.resolved_at&.to_formatted_s(:long)  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
